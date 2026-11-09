@@ -42,6 +42,7 @@ print(customer)
 del customer["email"]
 print(customer)
 
+
 # Exercise 3: Safe Lookup
 
 print(customer.get("email", "no email on file"))
@@ -62,3 +63,70 @@ for key, value in customer.items():
 
 for key in customer:
     print(key)
+
+
+# Exercise 5: Lookup Table
+
+tier_discounts = {
+    "bronze": 0,
+    "silver": 0.05,
+    "gold": 0.10,
+    "platinum": 0.15
+}
+
+tier = customer["tier"]
+discount = tier_discounts.get(tier, 0)
+price = 200
+final_price = price * (1 - discount)
+
+print("Tier:", tier)
+print(f"Discount: {discount:.0%}")
+print(f"Final price: ${final_price:.2f}")
+
+
+# Exercise 6: List of Dicts
+
+customer2 = {"name": "Bob", "tier": "silver"}
+customer3 = {"name": "Charlie", "tier": "gold"}
+
+customers = [customer, customer2, customer3]
+
+for person in customers:
+    name = person["name"]
+    tier = person["tier"]
+    discount = tier_discounts.get(tier, 0)
+    discount_amount = 300 * discount
+
+    print(f"{name}: {tier}, Discount: ${discount_amount:.2f}")
+
+
+# Exercise 7: Nested Catalog
+
+catalog = {
+    "Widget A": {"price": 9.99, "stock": 150},
+    "Gadget C": {"price": 49.99, "stock": 8}
+}
+
+for product, details in catalog.items():
+    if details["stock"] < 20:
+        print(f"LOW STOCK: {product}, Stock: {details['stock']}")
+
+
+# Exercise 8: Sales by Region
+
+transactions = [
+    {"region": "South", "amount": 300},
+    {"region": "North", "amount": 150},
+    {"region": "South", "amount": 200}
+]
+
+sales_summary = {}
+
+for transaction in transactions:
+    region = transaction["region"]
+    amount = transaction["amount"]
+
+    sales_summary[region] = sales_summary.get(region, 0) + amount
+
+for region in sorted(sales_summary):
+    print(f"{region}: {sales_summary[region]}")
